@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio - Username</title>
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        
+        body { 
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; 
+            background-color: #0b0712; 
+            color: #e2d9f3; 
+            line-height: 1.6; 
+        }
+
+        .container { 
+            max-width: 800px; 
+            margin: 0 auto; 
+            padding: 3rem 1.5rem; 
+        }
+
+        /* Hero Section */
+        .hero { 
+            text-align: center; 
+            padding: 2rem 1rem 3rem; 
+        }
+
+        .avatar { 
+            width: 110px; 
+            height: 110px; 
+            border-radius: 50%; 
+            border: 2px solid #a855f7; 
+            box-shadow: 0 0 20px rgba(168, 85, 247, 0.4); 
+            margin-bottom: 1.2rem; 
+            object-fit: cover; 
+        }
+
+        .title { 
+            font-size: 2.4rem; 
+            color: #ffffff; 
+            font-weight: 700; 
+            margin-bottom: 0.3rem; 
+        }
+
+        .title span { 
+            color: #a855f7; 
+            text-shadow: 0 0 10px rgba(168, 85, 247, 0.5); 
+        }
+
+        .subtitle { 
+            color: #a78bfa; 
+            font-size: 1.1rem; 
+            font-weight: 500; 
+            margin-bottom: 1.2rem; 
+        }
+
+        .bio { 
+            max-width: 580px; 
+            margin: 0 auto 1.8rem; 
+            color: #94a3b8; 
+            font-size: 0.95rem; 
+        }
+
+        /* Tech Stack Badges */
+        .tech-stack { 
+            display: flex; 
+            flex-wrap: wrap; 
+            gap: 8px; 
+            justify-content: center; 
+            margin-bottom: 1rem; 
+        }
+
+        .tech-badge { 
+            background: #1a102f; 
+            border: 1px solid #3b2063; 
+            color: #c084fc; 
+            padding: 4px 14px; 
+            border-radius: 20px; 
+            font-size: 0.82rem; 
+            font-weight: 500; 
+        }
+
+        /* Section Title */
+        .section-title { 
+            font-size: 1.3rem; 
+            color: #ffffff; 
+            margin: 2.5rem 0 1.2rem; 
+            border-left: 3px solid #a855f7; 
+            padding-left: 10px; 
+        }
+
+        /* Projects Cards Grid */
+        .projects-grid { 
+            display: grid; 
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); 
+            gap: 1.2rem; 
+        }
+
+        .card { 
+            background: #130c21; 
+            border: 1px solid #2d1b4e; 
+            border-radius: 12px; 
+            padding: 1.5rem; 
+            transition: all 0.3s ease; 
+        }
+
+        .card:hover { 
+            transform: translateY(-4px); 
+            border-color: #a855f7; 
+            box-shadow: 0 4px 20px rgba(168, 85, 247, 0.15); 
+        }
+
+        .card h3 { 
+            color: #ffffff; 
+            font-size: 1.1rem; 
+            margin-bottom: 0.5rem; 
+        }
+
+        .card p { 
+            color: #94a3b8; 
+            font-size: 0.88rem; 
+            margin-bottom: 1.2rem; 
+        }
+
+        .card a { 
+            color: #c084fc; 
+            text-decoration: none; 
+            font-size: 0.85rem; 
+            font-weight: 600; 
+        }
+
+        .card a:hover { 
+            text-decoration: underline; 
+        }
+
+        /* Social Links & Footer */
+        .socials { 
+            text-align: center; 
+            margin-top: 3.5rem; 
+            padding-top: 2rem; 
+            border-top: 1px solid #1f1438; 
+        }
+
+        .socials a { 
+            color: #a78bfa; 
+            text-decoration: none; 
+            margin: 0 12px; 
+            font-weight: 500; 
+            font-size: 0.95rem; 
+            transition: color 0.2s; 
+        }
+
+        .socials a:hover { 
+            color: #ffffff; 
+            text-shadow: 0 0 8px rgba(168, 85, 247, 0.8); 
+        }
+
+        footer { 
+            text-align: center; 
+            margin-top: 2rem; 
+            color: #4c3b6e; 
+            font-size: 0.8rem; 
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <!-- PROFIL / TENTANG SAYA -->
+        <section class="hero">
+            <!-- Ganti username GitHub Anda di src avatar ini -->
+            <img src="https://github.com/github.png" alt="Foto Profil" class="avatar">
+            <h1 class="title">Halo, Saya <span>[Nama Kamu]</span> 👋</h1>
+            <p class="subtitle">Web Developer & Tech Enthusiast</p>
+            <p class="bio">
+                Saya seorang pengembang web yang suka membangun aplikasi sederhana, eksplorasi teknologi baru, dan berbagi proyek open-source di GitHub.
+            </p>
+            
+            <div class="tech-stack">
+                <span class="tech-badge">HTML / CSS</span>
+                <span class="tech-badge">JavaScript</span>
+                <span class="tech-badge">Git & GitHub</span>
+                <span class="tech-badge">Python</span>
+            </div>
+        </section>
+
+        <!-- PROYEK SAYA -->
+        <h2 class="section-title">Proyek Saya</h2>
+        <div class="projects-grid">
+            <div class="card">
+                <h3>🚀 Proyek Website Pertama</h3>
+                <p>Landing page portofolio simpel dengan tema dark mode yang di-host gratis di GitHub Pages.</p>
+                <a href="https://github.com" target="_blank">Lihat Kode Repository &rarr;</a>
+            </div>
+
+            <div class="card">
+                <h3>⚡ Mini Web Application</h3>
+                <p>Aplikasi utilitas sederhana yang dibuat menggunakan JavaScript murni (Vanilla JS).</p>
+                <a href="https://github.com" target="_blank">Lihat Kode Repository &rarr;</a>
+            </div>
+        </div>
+
+        <!-- LINK SOSIAL MEDIA -->
+        <div class="socials">
+            <a href="https://github.com/USERNAME_KAMU" target="_blank">GitHub</a>
+            <a href="https://instagram.com/USERNAME_KAMU" target="_blank">Instagram</a>
+            <a href="https://linkedin.com/in/USERNAME_KAMU" target="_blank">LinkedIn</a>
+        </div>
+
+        <footer>
+            <p>&copy; 2026 [Nama Kamu] • Hosted on GitHub Pages</p>
+        </footer>
+    </div>
+
+</body>
+</html>
