@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dave | Portfolio</title>
+  
+  <!-- Import Google Fonts (Plus Jakarta Sans & JetBrains Mono) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@500;700&family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
+  
+  <!-- Icon dari FontAwesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      color: #f1f5f9;
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 1.5rem;
+      overflow-x: hidden;
+
+      /* Dynamic Smooth Animated Background */
+      background: linear-gradient(
+        -45deg,
+        rgb(10, 10, 15),   
+        rgb(30, 15, 50),   
+        rgb(88, 28, 135),  
+        rgb(19, 11, 31)    
+      );
+      background-size: 400% 400%;
+      animation: rgbBgSmooth 14s ease infinite;
+    }
+
+    @keyframes rgbBgSmooth {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    /* Canvas Efek Cyberpunk Rain */
+    #cyber-canvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 1;
+      opacity: 0.6; /* Tingkat transparansi efek */
+    }
+
+    /* Overlay Scanline Retro TV */
+    .scanlines {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      pointer-events: none;
+      z-index: 2;
+      background: linear-gradient(
+        rgba(18, 16, 16, 0) 50%, 
+        rgba(0, 0, 0, 0.25) 50%
+      );
+      background-size: 100% 4px;
+    }
+
+    /* Floating Language Switcher */
+    .lang-switcher {
+      position: fixed;
+      top: 1.2rem;
+      right: 1.2rem;
+      background: rgba(255, 255, 255, 0.08);
+      backdrop-filter: blur(12px);
+      border: 1px solid rgba(168, 85, 247, 0.3);
+      border-radius: 20px;
+      padding: 4px 8px;
+      display: flex;
+      gap: 4px;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+      z-index: 100;
+    }
+
+    .lang-btn {
+      background: transparent;
+      border: none;
+      color: #a1a1aa;
+      padding: 4px 10px;
+      font-size: 0.8rem;
+      font-weight: 700;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      border-radius: 14px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .lang-btn.active {
+      background: #8b5cf6;
+      color: #ffffff;
+      box-shadow: 0 0 10px rgba(139, 92, 246, 0.5);
+    }
+
+    /* Glassmorphism Card */
+    .card {
+      background: rgba(18, 12, 28, 0.75);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid rgba(168, 85, 247, 0.3);
+      border-radius: 20px;
+      padding: 2.5rem 2rem;
+      max-width: 480px;
+      width: 100%;
+      text-align: center;
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6),
+                  0 0 30px rgba(139, 92, 246, 0.2);
+      position: relative;
+      z-index: 10;
+    }
+
+    /* Badge & Text Styles */
+    .badge {
+      display: inline-block;
+      font-size: 0.75rem;
+      font-family: 'JetBrains Mono', monospace;
+      font-weight: 700;
+      background: rgba(139, 92, 246, 0.2);
+      color: #c084fc;
+      border: 1px solid rgba(192, 132, 252, 0.3);
+      padding: 4px 12px;
+      border-radius: 12px;
+      margin-bottom: 1rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    h1 {
+      font-size: 2.2rem;
+      font-weight: 800;
+      letter-spacing: -0.5px;
+      margin-bottom: 1.2rem;
+      background: linear-gradient(135deg, #ffffff, #c084fc);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .bio {
+      font-size: 0.98rem;
+      line-height: 1.6;
+      color: #cbd5e1;
+      margin-bottom: 1.5rem;
+      text-align: left;
+    }
+
+    .bio p {
+      margin-bottom: 0.9rem;
+    }
+
+    .highlight {
+      color: #c084fc;
+      font-family: 'JetBrains Mono', monospace;
+      font-weight: 500;
+      font-size: 0.9em;
+      background: rgba(168, 85, 247, 0.15);
+      padding: 2px 6px;
+      border-radius: 6px;
+      border: 1px solid rgba(168, 85, 247, 0.25);
+    }
+
+    .artist {
+      color: #e2e8f0;
+      font-weight: 700;
+      font-style: italic;
+    }
+
+    /* Spotify Widget Section */
+    .spotify-container {
+      margin: 1.5rem 0 1rem 0;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+      border: 1px solid rgba(168, 85, 247, 0.3);
+    }
+
+    /* Contact / Social Buttons */
+    .socials {
+      display: flex;
+      gap: 10px;
+      justify-content: center;
+      margin-top: 1.2rem;
+    }
+
+    .social-btn {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      padding: 10px 8px;
+      border-radius: 12px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      text-decoration: none;
+      color: #fff;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      transition: all 0.3s ease;
+    }
+
+    .social-btn:hover {
+      background: rgba(139, 92, 246, 0.3);
+      border-color: #a855f7;
+      transform: translateY(-2px);
+      box-shadow: 0 5px 15px rgba(138, 92, 246, 0.3);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Efek Layar Cyberpunk -->
+  <canvas id="cyber-canvas"></canvas>
+  <div class="scanlines"></div>
+
+  <!-- Menu Switch Bahasa -->
+  <div class="lang-switcher">
+    <button class="lang-btn active" onclick="setLanguage('id')">ID</button>
+    <button class="lang-btn" onclick="setLanguage('en')">EN</button>
+  </div>
+
+  <!-- Kartu Utama -->
+  <div class="card">
+    <span class="badge">About Me</span>
+    <h1>Hi, I'm Dave 👋</h1>
+
+    <div class="bio">
+      <!-- Teks Bahasa Indonesia -->
+      <div id="content-id">
+        <p>Saya adalah manusia biasa, yang <span class="highlight">ingin jadi programmer tapi enggan ngoding</span> 😹.</p>
+        <p>Saya tertarik pada hal-hal baru dan project-project yang unik.</p>
+        <p>Saya sangat menyukai musik. Artis favorit saya adalah <span class="artist">Kendrick Lamar</span>. 🎧</p>
+      </div>
+
+      <!-- Teks Bahasa Inggris -->
+      <div id="content-en" style="display: none;">
+        <p>I'm just a regular human who <span class="highlight">wants to be a programmer but avoids coding</span> 😹.</p>
+        <p>I'm interested in new things and unique projects.</p>
+        <p>I really love music. My favorite artist is <span class="artist">Kendrick Lamar</span>. 🎧</p>
+      </div>
+    </div>
+
+    <!-- Widget Spotify -->
+    <div class="spotify-container">
+      <iframe 
+        style="border-radius:12px" 
+        src="https://open.spotify.com/embed/track/6PGoSes0D9eUDeeAafB2As?utm_source=generator&theme=0" 
+        width="100%" 
+        height="152" 
+        frameBorder="0" 
+        allowfullscreen="" 
+        allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" 
+        loading="lazy">
+      </iframe>
+    </div>
+
+    <!-- Tombol Sosmed -->
+    <div class="socials">
+      <a href="https://github.com/DaveNeedCode" target="_blank" class="social-btn">
+        <i class="fa-brands fa-github"></i> GitHub
+      </a>
+      <a href="https://instagram.com/daveexyz" target="_blank" class="social-btn">
+        <i class="fa-brands fa-instagram"></i> Instagram
+      </a>
+      <a href="https://discord.gg/mD3sDcFUV4" target="_blank" class="social-btn">
+        <i class="fa-brands fa-discord"></i> Discord
+      </a>
+    </div>
+  </div>
+
+  <script>
+    // Fitur Switch Bahasa
+    function setLanguage(lang) {
+      const contentId = document.getElementById('content-id');
+      const contentEn = document.getElementById('content-en');
+      const buttons = document.querySelectorAll('.lang-btn');
+
+      if (lang === 'id') {
+        contentId.style.display = 'block';
+        contentEn.style.display = 'none';
+        buttons[0].classList.add('active');
+        buttons[1].classList.remove('active');
+      } else {
+        contentId.style.display = 'none';
+        contentEn.style.display = 'block';
+        buttons[0].classList.remove('active');
+        buttons[1].classList.add('active');
+      }
+    }
+
+    // Script Efek Cyberpunk Code Rain
+    const canvas = document.getElementById('cyber-canvas');
+    const ctx = canvas.getContext('2d');
+
+    let width = canvas.width = window.innerWidth;
+    let height = canvas.height = window.innerHeight;
+
+    window.addEventListener('resize', () => {
+      width = canvas.width = window.innerWidth;
+      height = canvas.height = window.innerHeight;
+    });
+
+    // Karakter Katakana & Hex Code Khas Cyberpunk
+    const characters = 'アァカサタナハマヤャラワガザダバパイィキシチニヒミリヰギジヂビピウゥクスツヌフムユュルグズブヅプエェケセテネヘメレヱゲゼデベペオォコソトノホモヨョロヲゴゾドボポヴッン0123456789ABCDEF';
+    const fontSize = 14;
+    const columns = Math.floor(width / fontSize);
+    const drops = [];
+
+    for (let i = 0; i < columns; i++) {
+      drops[i] = Math.random() * -100; // Posisi awal acak di atas
+    }
+
+    function drawCyberRain() {
+      // EfekJejak/Fade-out Hitam Transparan
+      ctx.fillStyle = 'rgba(10, 10, 15, 0.08)';
+      ctx.fillRect(0, 0, width, height);
+
+      ctx.font = fontSize + "px 'JetBrains Mono', monospace";
+
+      for (let i = 0; i < drops.length; i++) {
+        const text = characters.charAt(Math.floor(Math.random() * characters.length));
+        const x = i * fontSize;
+        const y = drops[i] * fontSize;
+
+        // Warna Ungu Neon / Pink Cyberpunk
+        if (Math.random() > 0.95) {
+          ctx.fillStyle = '#ffffff'; // Head glow putih sesekali
+        } else if (Math.random() > 0.5) {
+          ctx.fillStyle = '#c084fc'; // Purple Neon
+        } else {
+          ctx.fillStyle = '#e879f9'; // Pink/Magenta Glow
+        }
+
+        ctx.fillText(text, x, y);
+
+        if (y > height && Math.random() > 0.975) {
+          drops[i] = 0;
+        }
+        drops[i]++;
+      }
+
+      requestAnimationFrame(drawCyberRain);
+    }
+
+    drawCyberRain();
+  </script>
+</body>
+</html>
