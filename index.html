@@ -10,6 +10,8 @@
   <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@500;700&family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   
+  <script src="https://cdn.jsdelivr.net/npm/counterapi/dist/counter.browser.min.js"></script>
+
   <style>
     * {
       box-sizing: border-box;
@@ -344,21 +346,26 @@
       }
     }
 
-    async function updateVisitorCount() {
+    document.addEventListener('DOMContentLoaded', function() {
       try {
-        let response = await fetch('https://api.counterapi.dev/v1/davegt/visits/up');
-        let data = await response.json();
-        let baseCount = 167;
-        let total = baseCount + (data.count || 0);
-        document.getElementById('count-number').innerText = total;
-      } catch (error) {
-        let currentVisits = parseInt(localStorage.getItem('page_visits') || '0') + 1;
-        localStorage.setItem('page_visits', currentVisits);
-        document.getElementById('count-number').innerText = 167 + currentVisits;
-      }
-    }
+        const counter = new Counter({ workspace: 'daveweb' });
 
-    updateVisitorCount();
+        counter.up('visits')
+          .then(result => {
+            let baseCount = 167;
+            let total = baseCount + (result.value || 0);
+            document.getElementById('count-number').innerText = total;
+          })
+          .catch(error => {
+            console.error('CounterAPI Error:', error);
+            let currentVisits = parseInt(localStorage.getItem('page_visits') || '0') + 1;
+            localStorage.setItem('page_visits', currentVisits);
+            document.getElementById('count-number').innerText = 167 + currentVisits;
+          });
+      } catch (err) {
+        console.error('Counter Init Error:', err);
+      }
+    });
 
     const canvas = document.getElementById('cyber-canvas');
     const ctx = canvas.getContext('2d');
