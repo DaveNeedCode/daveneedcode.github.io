@@ -237,6 +237,22 @@
       transform: translateY(-2px);
       box-shadow: 0 5px 15px rgba(138, 92, 246, 0.3);
     }
+
+    .visitor-counter {
+      margin-top: 1.5rem;
+      font-size: 0.75rem;
+      font-family: 'JetBrains Mono', monospace;
+      color: #94a3b8;
+      background: rgba(255, 255, 255, 0.03);
+      padding: 8px;
+      border-radius: 10px;
+      border: 1px solid rgba(255, 255, 255, 0.05);
+    }
+
+    .visitor-counter span {
+      color: #c084fc;
+      font-weight: 700;
+    }
   </style>
 </head>
 <body>
@@ -255,7 +271,7 @@
 
     <div class="profile-frame">
       <div class="profile-photo">
-        <img src="6495313412f1fb7b5beac3bbbbeb9694 (2).jpg" alt="Foto Profil Dave">
+        <img src="https://i.ibb.co.com/TM677CRL/6495313412f1fb7b5beac3bbbbeb9694-2.jpg" alt="Foto Profil Dave">
       </div>
     </div>
 
@@ -297,26 +313,52 @@
         <i class="fa-brands fa-discord"></i> Discord
       </a>
     </div>
+
+    <div class="visitor-counter">
+      <span id="visitor-text">Total Pengunjung:</span> <span id="count-number">167</span> <span id="visitor-suffix">orang</span>
+    </div>
   </div>
 
   <script>
     function setLanguage(lang) {
       const contentId = document.getElementById('content-id');
       const contentEn = document.getElementById('content-en');
+      const visitorText = document.getElementById('visitor-text');
+      const visitorSuffix = document.getElementById('visitor-suffix');
       const buttons = document.querySelectorAll('.lang-btn');
 
       if (lang === 'id') {
         contentId.style.display = 'block';
         contentEn.style.display = 'none';
+        visitorText.innerText = "Total Pengunjung:";
+        visitorSuffix.innerText = "orang";
         buttons[0].classList.add('active');
         buttons[1].classList.remove('active');
       } else {
         contentId.style.display = 'none';
         contentEn.style.display = 'block';
+        visitorText.innerText = "Total Visitors:";
+        visitorSuffix.innerText = "visitors";
         buttons[0].classList.remove('active');
         buttons[1].classList.add('active');
       }
     }
+
+    async function updateVisitorCount() {
+      try {
+        let response = await fetch('https://api.counterapi.dev/v1/davegt/visits/up');
+        let data = await response.json();
+        let baseCount = 167;
+        let total = baseCount + (data.count || 0);
+        document.getElementById('count-number').innerText = total;
+      } catch (error) {
+        let currentVisits = parseInt(localStorage.getItem('page_visits') || '0') + 1;
+        localStorage.setItem('page_visits', currentVisits);
+        document.getElementById('count-number').innerText = 167 + currentVisits;
+      }
+    }
+
+    updateVisitorCount();
 
     const canvas = document.getElementById('cyber-canvas');
     const ctx = canvas.getContext('2d');
