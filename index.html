@@ -5,12 +5,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Dave | Portfolio</title>
   
-  <!-- Import Google Fonts (Plus Jakarta Sans & JetBrains Mono) -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@500;700&family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
-  
-  <!-- Icon dari FontAwesome -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   
   <style>
@@ -29,8 +26,6 @@
       align-items: center;
       padding: 1.5rem;
       overflow-x: hidden;
-
-      /* Dynamic Smooth Animated Background */
       background: linear-gradient(
         -45deg,
         rgb(10, 10, 15),   
@@ -48,7 +43,6 @@
       100% { background-position: 0% 50%; }
     }
 
-    /* Canvas Efek Cyberpunk Rain */
     #cyber-canvas {
       position: fixed;
       top: 0;
@@ -57,10 +51,9 @@
       height: 100%;
       pointer-events: none;
       z-index: 1;
-      opacity: 0.6; /* Tingkat transparansi efek */
+      opacity: 0.6;
     }
 
-    /* Overlay Scanline Retro TV */
     .scanlines {
       position: fixed;
       top: 0;
@@ -76,7 +69,6 @@
       background-size: 100% 4px;
     }
 
-    /* Floating Language Switcher */
     .lang-switcher {
       position: fixed;
       top: 1.2rem;
@@ -111,7 +103,6 @@
       box-shadow: 0 0 10px rgba(139, 92, 246, 0.5);
     }
 
-    /* Glassmorphism Card */
     .card {
       background: rgba(18, 12, 28, 0.75);
       backdrop-filter: blur(16px);
@@ -128,7 +119,6 @@
       z-index: 10;
     }
 
-    /* Badge & Text Styles */
     .badge {
       display: inline-block;
       font-size: 0.75rem;
@@ -152,6 +142,32 @@
       background: linear-gradient(135deg, #ffffff, #c084fc);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
+    }
+
+    .profile-frame {
+      display: flex;
+      justify-content: center;
+      margin-bottom: 1.5rem;
+    }
+
+    .profile-photo {
+      width: 130px;
+      height: 130px;
+      border-radius: 50%;
+      overflow: hidden;
+      border: 2px solid rgba(192, 132, 252, 0.6);
+      box-shadow: 0 0 20px rgba(139, 92, 246, 0.5);
+      transition: transform 0.3s ease;
+    }
+
+    .profile-photo:hover {
+      transform: scale(1.05);
+    }
+
+    .profile-photo img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
     }
 
     .bio {
@@ -183,7 +199,6 @@
       font-style: italic;
     }
 
-    /* Spotify Widget Section */
     .spotify-container {
       margin: 1.5rem 0 1rem 0;
       border-radius: 12px;
@@ -192,7 +207,6 @@
       border: 1px solid rgba(168, 85, 247, 0.3);
     }
 
-    /* Contact / Social Buttons */
     .socials {
       display: flex;
       gap: 10px;
@@ -227,30 +241,31 @@
 </head>
 <body>
 
-  <!-- Efek Layar Cyberpunk -->
   <canvas id="cyber-canvas"></canvas>
   <div class="scanlines"></div>
 
-  <!-- Menu Switch Bahasa -->
   <div class="lang-switcher">
     <button class="lang-btn active" onclick="setLanguage('id')">ID</button>
     <button class="lang-btn" onclick="setLanguage('en')">EN</button>
   </div>
 
-  <!-- Kartu Utama -->
   <div class="card">
     <span class="badge">About Me</span>
     <h1>Hi, I'm Dave 👋</h1>
 
+    <div class="profile-frame">
+      <div class="profile-photo">
+        <img src="https://i.ibb.co.com/TM677CRL/6495313412f1fb7b5beac3bbbbeb9694-2.jpg" alt="Foto Profil Dave">
+      </div>
+    </div>
+
     <div class="bio">
-      <!-- Teks Bahasa Indonesia -->
       <div id="content-id">
         <p>Saya adalah manusia biasa, yang <span class="highlight">ingin jadi programmer tapi enggan ngoding</span> 😹.</p>
         <p>Saya tertarik pada hal-hal baru dan project-project yang unik.</p>
         <p>Saya sangat menyukai musik. Artis favorit saya adalah <span class="artist">Kendrick Lamar</span>. 🎧</p>
       </div>
 
-      <!-- Teks Bahasa Inggris -->
       <div id="content-en" style="display: none;">
         <p>I'm just a regular human who <span class="highlight">wants to be a programmer but avoids coding</span> 😹.</p>
         <p>I'm interested in new things and unique projects.</p>
@@ -258,7 +273,6 @@
       </div>
     </div>
 
-    <!-- Widget Spotify -->
     <div class="spotify-container">
       <iframe 
         style="border-radius:12px" 
@@ -272,7 +286,6 @@
       </iframe>
     </div>
 
-    <!-- Tombol Sosmed -->
     <div class="socials">
       <a href="https://github.com/DaveNeedCode" target="_blank" class="social-btn">
         <i class="fa-brands fa-github"></i> GitHub
@@ -287,7 +300,6 @@
   </div>
 
   <script>
-    // Fitur Switch Bahasa
     function setLanguage(lang) {
       const contentId = document.getElementById('content-id');
       const contentEn = document.getElementById('content-en');
@@ -306,7 +318,6 @@
       }
     }
 
-    // Script Efek Cyberpunk Code Rain
     const canvas = document.getElementById('cyber-canvas');
     const ctx = canvas.getContext('2d');
 
@@ -318,18 +329,16 @@
       height = canvas.height = window.innerHeight;
     });
 
-    // Karakter Katakana & Hex Code Khas Cyberpunk
     const characters = 'アァカサタナハマヤャラワガザダバパイィキシチニヒミリヰギジヂビピウゥクスツヌフムユュルグズブヅプエェケセテネヘメレヱゲゼデベペオォコソトノホモヨョロヲゴゾドボポヴッン0123456789ABCDEF';
     const fontSize = 14;
     const columns = Math.floor(width / fontSize);
     const drops = [];
 
     for (let i = 0; i < columns; i++) {
-      drops[i] = Math.random() * -100; // Posisi awal acak di atas
+      drops[i] = Math.random() * -100;
     }
 
     function drawCyberRain() {
-      // EfekJejak/Fade-out Hitam Transparan
       ctx.fillStyle = 'rgba(10, 10, 15, 0.08)';
       ctx.fillRect(0, 0, width, height);
 
@@ -340,13 +349,12 @@
         const x = i * fontSize;
         const y = drops[i] * fontSize;
 
-        // Warna Ungu Neon / Pink Cyberpunk
         if (Math.random() > 0.95) {
-          ctx.fillStyle = '#ffffff'; // Head glow putih sesekali
+          ctx.fillStyle = '#ffffff';
         } else if (Math.random() > 0.5) {
-          ctx.fillStyle = '#c084fc'; // Purple Neon
+          ctx.fillStyle = '#c084fc';
         } else {
-          ctx.fillStyle = '#e879f9'; // Pink/Magenta Glow
+          ctx.fillStyle = '#e879f9';
         }
 
         ctx.fillText(text, x, y);
